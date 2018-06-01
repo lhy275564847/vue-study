@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<!--遍历数组-->
+<!--<div id="app">-->
+<!--<p v-for="(item,index) in list">{{item}}-&#45;&#45;{{index}}</p>-->
+<!--</div>-->
+
+<!--遍历对象数组-->
+<!--<div id="app2">-->
+<!--<p v-for="(item,index) in list">{{item.name}}-&#45;&#45;{{item.age}}-&#45;&#45;{{index}}</p>-->
+<!--</div>-->
+
+<!--遍历对象-->
+<!--<div id="app3">-->
+<!--<p v-for="(val,key,index) in user">{{val}}-&#45;&#45;{{key}}-&#45;&#45;{{index}}</p>-->
+<!--</div>-->
+
+<!--遍历数字-->
+<!--<div id="app4">-->
+<!--<p v-for="count in 5" style="color: aquamarine">{{count}}</p>-->
+<!--</div>-->
+
+<!--遍历对象数组,vue2后，遍历需要绑定key，标识数据唯一只能使用number或者string-->
+<div id="app5">
+  <p v-for="(item,index) in list" v-bind:key="item.id">id:{{item.id}}---name:{{item.name}}---age:{{item.age}}---index:{{index}}</p>
+</div>
+
+<script>
+  var vm2 = new Vue({
+    el: '#app5',
+    data: {
+      list: [
+        {id: 1, name: 'a', age: 5},
+        {id: 2, name: 'b', age: 4},
+        {id: 3, name: 'c', age: 3},
+        {id: 4, name: 'd', age: 2},
+        {id: 5, name: 'e', age: 1}
+      ]
+    },
+    methods: {}
+  });
+
+  var vm4 = new Vue({
+    el: '#app4',
+    data: {
+      count: 0
+    },
+    methods: {}
+  });
+
+  var vm3 = new Vue({
+    el: '#app3',
+    data: {
+      user: {
+        id: 1,
+        name: '李',
+        age: 24
+      }
+    },
+    methods: {}
+  });
+
+  var vm2 = new Vue({
+    el: '#app2',
+    data: {
+      list: [
+        {name: 'a', age: 5},
+        {name: 'b', age: 4},
+        {name: 'c', age: 3},
+        {name: 'd', age: 2},
+        {name: 'e', age: 1}
+      ]
+    },
+    methods: {}
+  });
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      list: [1, 2, 3, 4, 5, 6]
+    },
+    methods: {}
+  });
+
+</script>
+</body>
+</html>

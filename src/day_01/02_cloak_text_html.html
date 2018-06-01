@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <style>
+
+
+  </style>
+</head>
+<body>
+
+<!--vue 实例控制元素区域-->
+<div id="app">
+  <!--可以解决表达式值闪烁问题-->
+  <p v-cloak>++++{{msg}}----</p>
+
+  <p v-text="msg">+++++---</p>
+  <!--元素内容以html显示-->
+  <p v-html="msg2"></p>
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'Hello Vue！！！',
+      msg2:'<h1>我是一个大大的哈哈</h1>'
+    }
+  });
+
+</script>
+</body>
+</html>

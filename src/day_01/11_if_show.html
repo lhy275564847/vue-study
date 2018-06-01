@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<div id="app">
+  <input type="button" value="切换" @click="flag = !flag">
+  <!--if会动态存在，动态重新渲染-->
+  <p v-if="flag">这是if</p>
+  <!--元素一直显示，只是可能被隐藏或者禁用了-->
+  <p v-show="flag">这是show</p>
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      flag: true
+    },
+    methods: {}
+  });
+
+</script>
+</body>
+</html>

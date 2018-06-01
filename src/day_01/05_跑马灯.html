@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <style>
+
+
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <input type="button" value="开始" @click="start">
+  <input type="button" value="停止" @click="stop">
+  <h4 v-text="msg"></h4>
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg: '猥琐发育，别浪！！！',
+      intervalId: null
+    },
+    methods: {
+      start() {
+        // setInterval(function () {
+        //
+        //   //访问msg需要使用this,作用域不一样，需要定义this
+        //   var start = _this.msg.substring(0, 1)
+        //   var end = _this.msg.substring(1)
+        //   _this.msg = end + start
+        //   console.log(_this.msg)
+        // }, 400)
+
+        //方法缩写。箭头函数的this，是引用的是外部的this
+        if (!this.intervalId) {
+          var temp = setInterval(() => {
+            //访问msg需要使用this,作用域不一样，需要定义this
+            var start = this.msg.substring(0, 1)
+            var end = this.msg.substring(1)
+            this.msg = end + start
+            console.log(this.msg)
+          }, 400)
+          this.intervalId = temp
+        }
+      },
+      stop() {
+        clearInterval(this.intervalId)
+        this.intervalId = null
+      }
+    }
+  });
+
+</script>
+</body>
+</html>

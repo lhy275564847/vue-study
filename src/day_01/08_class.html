@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <style>
+    .red {
+      color: red;
+    }
+
+    .fontSize {
+      font-size: 20px;
+      letter-spacing: 0.5em;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <!--<p class="red fontSize">这是一个P标签</p>-->
+
+  <!--<p :class="['red','fontSize']">这是一个P标签</p>-->
+
+  <!--<p :class="['red',flag? 'fontSize':'']">这是一个P标签</p>-->
+
+  <!--<p :class="['red',{fontSize:flag}]">这是一个P标签</p>-->
+
+  <!--<p :class="{red: false,fontSize: true}">这是一个P标签</p>-->
+
+  <p :class="classObj">这是一个P标签</p>
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      flag: true,
+      classObj:{red: true,fontSize: true}
+    },
+    methods: {}
+  });
+
+</script>
+</body>
+</html>

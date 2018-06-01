@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<!--vue 实例控制元素区域-->
+<div id="app">
+  <p>{{msg}}</p>
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',     //控制页面的哪个区域
+    data: {         //存放el用到的数据,自动绑定，不需要手动操作dom
+      msg: 'Hello Vue！！！'
+    }
+  });
+
+</script>
+</body>
+</html>

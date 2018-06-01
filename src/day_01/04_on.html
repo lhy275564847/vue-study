@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <style>
+
+
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <!--<input type="button" value="按钮" v-bind:title="myTitle">-->
+  <!--简写-->
+  <!--<input type="button" value="按钮" :title="myTitle" @mouseover="show">-->
+  <!--绑定其它事件-->
+  <input type="button" value="按钮" :title="myTitle" v-on:click="show">
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      myTitle: 'myTitle-----'
+    },
+    methods: {
+      // show: function () {
+      //   alert('AAA')
+      // }
+      //方法的简写
+      show () {
+        alert('AAA')
+      }
+    }
+  });
+
+</script>
+</body>
+</html>

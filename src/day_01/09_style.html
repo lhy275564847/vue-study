@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<div id="app">
+  <!--样式属性key有横线，必须加上引号-->
+  <!--<spap :style="{color:'red','font-weight':'200'}">这是一个span标签</spap>-->
+
+  <spap :style="[styleObj1, styleObj2]">这是一个span标签</spap>
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      styleObj1: {color:'red','font-weight':'200'},
+      styleObj2: {'font-style':'italic'}
+    },
+    methods: {}
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <style>
+    .inner {
+      height: 50px;
+      background-color: red;
+    }
+
+    .outer {
+      padding: 20px;
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <!--<div id="inner" @click="divClick">-->
+  <!--stop阻止冒泡行为-->
+  <!--<input type="button" value="点击" @click.stop="btnClick">-->
+  <!--</div>-->
+
+  <!--prevent阻止默认行为-->
+  <!--<a href="http://www.baidu.com" @click.prevent="linkClick">点击去百度</a>-->
+
+  <!--capture 往里面冒泡-->
+  <!--<div id="inner" @click.capture="divClick">-->
+  <!--stop阻止冒泡行为-->
+  <!--<input type="button" value="点击" @click="btnClick">-->
+  <!--</div>-->
+
+  <!--once 只触发一次-->
+  <!--<a href="http://www.baidu.com" @click.prevent.once="linkClick">点击去百度</a>-->
+
+  <!--self只会自己的行为，不会阻止冒出去-->
+  <div class="outer" @click="div2Click">
+    <div class="inner" @click.self="divClick">
+      <input type="button" value="点击" @click="btnClick">
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {
+      divClick() {
+        console.log("div click......")
+      },
+      btnClick() {
+        console.log("btn click......")
+      },
+      linkClick() {
+        console.log("link click......")
+      },
+      div2Click(){
+        console.log("div2 click......")
+      }
+    }
+  });
+
+</script>
+</body>
+</html>
