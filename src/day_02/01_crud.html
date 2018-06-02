@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<!--vue 实例控制元素区域-->
+<div id="app">
+  <label>id</label>
+  <input type="text" v-model="id" placeholder="id"><br>
+  <label>姓名</label>
+  <input type="text" v-model="name" placeholder="姓名"><br>
+  <label>年龄</label>
+  <input type="number" v-model="age" placeholder="年龄"><br>
+  <label>生日</label>
+  <input type="date" v-model="born"><br>
+  <input type="button" value="添加" @click="add"><br>
+  <input type="text" v-model="keywords" placeholder="关键字过滤">
+  <br>
+  <br>
+
+  <table width="450" style="align-content: center" border="1">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>born</th>
+      <th>handler</th>
+    </tr>
+    <tr v-for="user in search(keywords)" :key="user.id">
+      <td>{{user.id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.age}}</td>
+      <td>{{user.born}}</td>
+      <td><input type="button" value="删除" @click.self="del(user.id)"></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      id: '',
+      name: '',
+      age: null,
+      born: null,
+      keywords: '',
+      list: [
+        {id: 1, name: 'a', age: 10, born: new Date()},
+        {id: 2, name: 'b', age: 20, born: new Date()}
+      ]
+    },
+    methods: {
+      add() {
+        var user = {id: this.id, name: this.name, age: this.age, born: this.born}
+        console.log(user)
+        this.list.push(user)
+      },
+      del(id) {
+        console.log(id)
+        this.list.some((item, i) => {
+          if (item.id == id) {
+            this.list.splice(i, 1)
+            return true
+          }
+        });
+      },
+      search(keywords) {
+        // var newList = []
+        // this.list.forEach(item => {
+        //   if (item.name.indexOf(keywords) != -1) {
+        //     newList.push(item);
+        //   }
+        // })
+        // return newList
+
+        // 使用过滤器
+        return this.list.filter(item => {
+          if (item.name.includes(keywords)) {
+            return item
+          }
+        })
+      }
+    }
+  });
+
+</script>
+</body>
+</html>

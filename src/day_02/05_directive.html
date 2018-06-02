@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<!--vue 实例控制元素区域-->
+<div id="app">
+  <label>id</label>
+  <input type="text" v-model="id" placeholder="id"><br>
+  <label>姓名</label>
+  <!--注意使用单引号表示字符串-->
+  <input type="text" v-model="name" placeholder="姓名" v-focus v-color="'blue'"><br>
+  <label>年龄</label>
+  <!--keyup 键盘事件-->
+  <input type="number" v-model="age" placeholder="年龄" @keyup.f2="add"><br>
+  <label>生日</label>
+  <input type="date" v-model="born"><br>
+  <input type="button" value="添加" @click="add"><br>
+  <input type="text" v-model="keywords" placeholder="关键字过滤">
+  <br>
+  <br>
+
+  <table width="450" style="align-content: center" border="1">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>born</th>
+      <th>handler</th>
+    </tr>
+    <tr v-for="user in search(keywords)" :key="user.id">
+      <td>{{user.id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.age}}</td>
+      <td>{{user.born}}</td>
+      <td><input type="button" value="删除" @click.self="del(user.id)"></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+
+  // 自定义指令
+  Vue.directive('focus', {
+    // 绑定的时候执行 el,绑定的元素，原生的DOM元素
+    bind: function (el) {
+      console.log('bing...')
+    },
+    // 元素插入的到DOM的时候会执行
+    inserted: function (el) {
+      console.log('inserted...')
+      el.focus();
+    },
+    // VNode更新的时候会执行
+    updated: function (el) {
+      console.log('updated...')
+    }
+  })
+
+  // 自定义指令
+  Vue.directive('color', {
+    bind: function (el, binding) {
+      // 不管元素有没有插入，都有这个样式，一个内联的样式
+      el.style.color = binding.value
+      console.log('bing...')
+    },
+    inserted: function (el) {
+      console.log('inserted...')
+      el.focus();
+    },
+    updated: function (el) {
+      console.log('updated...')
+    }
+  })
+
+  //修改键盘别名
+  Vue.config.keyCodes.f2 = 113
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      id: '',
+      name: '',
+      age: null,
+      born: null,
+      keywords: '',
+      list: [
+        {id: 1, name: 'a', age: 10, born: new Date()},
+        {id: 2, name: 'b', age: 20, born: new Date()}
+      ]
+    },
+    methods: {
+      add() {
+        var user = {id: this.id, name: this.name, age: this.age, born: this.born}
+        console.log(user)
+        this.list.push(user)
+      },
+      del(id) {
+        console.log(id)
+        this.list.some((item, i) => {
+          if (item.id == id) {
+            this.list.splice(i, 1)
+            return true
+          }
+        });
+      },
+      search(keywords) {
+        // var newList = []
+        // this.list.forEach(item => {
+        //   if (item.name.indexOf(keywords) != -1) {
+        //     newList.push(item);
+        //   }
+        // })
+        // return newList
+
+        // 使用过滤器
+        return this.list.filter(item => {
+          if (item.name.includes(keywords)) {
+            return item
+          }
+        })
+      }
+    },
+    //私有指令
+    directives: {
+      'fontweight': {
+        bind: function (el, binding) {
+          el.style.fontweight = binding.value
+        }
+      },
+      //简写形式 bind和updated函数写一起了
+      'fontsize': function (el, binding) {
+        el.style.fontsize = binding.value
+      }
+    }
+  });
+
+</script>
+</body>
+</html>

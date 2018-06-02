@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<!--vue 实例控制元素区域-->
+<div id="app">
+  <label>id</label>
+  <input type="text" v-model="id" placeholder="id"><br>
+  <label>姓名</label>
+  <input type="text" v-model="name" placeholder="姓名"><br>
+  <label>年龄</label>
+  <input type="number" v-model="age" placeholder="年龄"><br>
+  <label>生日</label>
+  <input type="date" v-model="born"><br>
+  <input type="button" value="添加" @click="add">
+  <br>
+
+  <table width="450" style="align-content: center" border="1">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>born</th>
+      <th>handler</th>
+    </tr>
+    <tr v-for="user in list" :key="user.id">
+      <td>{{user.id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.age}}</td>
+      <!--使用日期过滤器-->
+      <td>{{user.born | dateFormat('yyyy-mm-dd hh')}}</td>
+      <td><input type="button" value="删除" @click.self="del(user.id)"></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+
+  // 自定义过滤器
+  Vue.filter("dateFormat", function (dateStr, format) {
+    var dt = new Date(dateStr)
+    var y = dt.getFullYear()
+    var m = dt.getMonth() + 1
+    var d = dt.getDate()
+
+    if (format.toLowerCase() === 'yyyy-mm-dd') {
+      return `${y}-${m}-${d}`
+    } else {
+      return `${y}/${m}/${d}`
+    }
+  })
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      id: '',
+      name: '',
+      age: null,
+      born: null,
+      list: [
+        {id: 1, name: 'a', age: 10, born: new Date()},
+        {id: 2, name: 'b', age: 20, born: new Date()}
+      ]
+    },
+    methods: {
+      add() {
+        var user = {id: this.id, name: this.name, age: this.age, born: this.born}
+        console.log(user)
+        this.list.push(user)
+      },
+      del(id) {
+        console.log(id)
+        this.list.some((item, i) => {
+          if (item.id == id) {
+            this.list.splice(i, 1)
+            return true
+          }
+        });
+      },
+      // 私有过滤器 如果私有和全局一样，就近原则，有限使用自己的过滤器
+      filters: {
+        dateFormat(dateStr,pattern) {
+
+        }
+      }
+    }
+  });
+
+</script>
+</body>
+</html>

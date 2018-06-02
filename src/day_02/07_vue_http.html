@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource"></script>
+</head>
+<body>
+<div id="app">
+  <input type="button" value="get" @click="getInfo">
+  <input type="button" value="post" @click="postInfo">
+</div>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'this is msg!'
+    },
+    methods: {
+      getInfo() {
+        this.$http.get('http://www.baidu.com', {}, {emulateJSON: true}).then(function (result) {
+          console.log(result)
+        })
+      },
+      postInfo() {
+        this.$http.post('http://www.baidu.com').then(function (result) {
+          console.log(result)
+        })
+      }
+    },
+  });
+</script>
+</body>
+</html>

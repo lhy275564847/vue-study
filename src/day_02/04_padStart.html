@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<div id="app">
+  <p>{{dt | dateFilter}}</p>
+</div>
+<script>
+  Vue.filter("dateFilter", function (dateStr) {
+    // padStart 补齐字符串
+    var dt = new Date(dateStr)
+    var y = dt.getFullYear()
+    var m = (dt.getMonth() + 1).toString().padStart(2, '0')
+    var d = dt.getDate().toString().padStart(2, '0')
+    var hh = dt.getHours().toString().padStart(2, '0')
+    var mm = dt.getMinutes().toString().padStart(2, '0')
+    var ss = dt.getSeconds().toString().padStart(2, '0')
+
+    return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+  })
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      dt: new Date()
+    }
+  });
+
+</script>
+</body>
+</html>

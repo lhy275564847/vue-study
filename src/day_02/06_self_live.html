@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+  <h1 id="h1">{{msg}}</h1>
+</div>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'this is msg!'
+    },
+    methods: {
+      show() {
+        console.log('show run ...')
+      }
+    },
+    // 第一个生命周期函数，vue实例创建之前会执行，date和method都还没有初始化
+    beforeCreate() {
+      // console.log(this.msg)
+      // console.log(this.show())
+      console.log('beforeCreate run ...')
+    },
+    // 第二个生命周期函数,date和method都已经初始化好了
+    created() {
+      console.log(this.msg)
+      this.show()
+    },
+    // 第三个周期函数，表示模板已经在内存中编译完成，但是还没有把模板渲染到页面中
+    beforeMount() {
+      // 页面中的元素还水龙骨真正的替换过来
+      console.log(document.getElementById("h1").innerText)
+    },
+    // 第四个周期函数，内存中的模板已经渲染到页面中
+    mounted() {
+      console.log(document.getElementById("h1").innerText)
+      // mounted是实例期间的最后一个周期函数
+    },
+
+    //运行中的两个事件
+    beforeUpdate() {
+      console.log('beforeUpdate run ...')
+      //修改的时候，页面内容还没有更新
+      console.log(document.getElementById("h1").innerText)
+      //vue属性已经更新了
+      console.log(this.msg)
+      // 执行完后才会把data数据同步到页面
+    },
+    updated() {
+      console.log('updated run ...')
+      // 执行的时候，页面和data数据已经同步了
+      console.log(document.getElementById("h1").innerText)
+      console.log(this.msg)
+    },
+    beforeDestroy() {
+      // vue实例的所有都处于可用状态，没有真正的执行销毁过程
+    },
+    destroy() {
+      //所有的都不可用
+    }
+  });
+</script>
+</body>
+</html>
